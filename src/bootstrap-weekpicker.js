@@ -1,7 +1,15 @@
 (function($) {
 
-    $.fn.weekpicker = function() {
+    $.fn.weekpicker = function(options) {
 
+        // Default options
+        var defaults = {
+            label: "Week %W, %Y",
+        };
+        
+        //Settings for instance
+        var settings = $.extend( {}, defaults, options );
+        
         // Variables
         var currentDate = moment(),
             selectedWeek,
@@ -35,8 +43,8 @@
                 year += 1;
             }
             selectedYear = year;
-
-            element.val("Week " + calendarWeek + ", " + year);
+            
+            element.val(settings.label.replace('%W',calendarWeek).replace('%Y',year));
         }
 
         function createButton (direction, siblingElement) {
